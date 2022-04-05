@@ -71,8 +71,21 @@
   grid-area: process;
 }
 
+.process > div {
+  width: 12rem;
+  height: 12rem;
+  margin: 1.2rem auto;
+}
+
+.process > div > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
 .button {
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 1.5rem;
   background: rgb(37, 111, 138);
   color: #fff;
   font-weight: 700;

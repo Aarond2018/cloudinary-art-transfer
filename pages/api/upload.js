@@ -8,25 +8,27 @@ cloudinary.config({
 });
 
 export default async function handler(req, res) {
-	const tempId = `${req.body.tempId.split("/")[1]}`;
-	console.log(tempId);
+	/* const tempId = `${req.body.tempId.split("/")[1]}`; */
 
 	try {
-		const cldRes = await cloudinary.image("public/passport.jpg", {
-			transformation: [
-				{ height: 700, width: 700, crop: "fill" },
-				{ overlay: tempId },
-				{ effect: "style_transfer", flags: "layer_apply" },
-			],
-		});
+		const image = await cloudinary.uploader.upload(
+			req.body.img,{
+        folder: "art-transfer"
+      },
+			async function (error, result) {	
+        const response = await cloudinary.image(`${result.public_id}.jpg`, {
+          transformation: [
+            { height: 700, width: 700, crop: "fill" },
+            { overlay: req.body.tempId },
+            { effect: "style_transfer", flags: "layer_apply" },
+          ],
+        });
+        res.status(200).json(response);
+			}
+		);
 
 		/* const d = /'(.+)'/.exec(cldRes); */
-
-		/* const cld = await cloudinary.uploader.upload("public/passport.jpg", function(error, result) {console.log(result, error)}); */
-
-		res.status(200).json(cldRes);
 	} catch (error) {
-		/* res.json({message: "an error occured"}) */
 		res.json(error);
 	}
 }

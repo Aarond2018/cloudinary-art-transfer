@@ -67,7 +67,7 @@ export default function Home(props) {
 					</div>
 				</div>
 				<div className={styles.upload}>
-					<h3>Upload your image</h3>
+					<h4>Upload your image</h4>
 					<input type="file" onChange={handleInputChange}></input>
 					<div>{!image ? "" : <img src={image}></img>}</div>
 				</div>
@@ -85,11 +85,3 @@ export default function Home(props) {
 		</div>
 	);
 }
-
-/* export const getStaticProps = async () => {
-  const res = await axios.get("/api/getImages");
-  const data = res.data
-  return {
-    props: { data }
-  };
-}; */

@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   try {
     const images = await cloudinary.api.resources({
       type: 'upload',
-      prefix: 'art-transfer'
+      prefix: 'demoImage'
     }); 
     res.status(200).json(images.resources);
   } catch (error) {
