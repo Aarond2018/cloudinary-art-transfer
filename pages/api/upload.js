@@ -1,3 +1,4 @@
+import Cors from 'cors'
 const cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
@@ -7,10 +8,27 @@ cloudinary.config({
 	secure: true,
 });
 
+const cors = Cors({
+  methods: ['GET', 'HEAD', 'POST'],
+})
+
+function runMiddleware(req, res, fn) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+      return resolve(result);
+    });
+  });
+}
+
 export default async function handler(req, res) {
+	await runMiddleware(req, res, cors)
+	
 	try {
 		const image = await cloudinary.uploader.upload(
-			req.body.img,{
+			req.body.img, {
         folder: "art-transfer"
       },
 			async function (error, result) {
@@ -27,5 +45,13 @@ export default async function handler(req, res) {
 		);
 	} catch (error) {
 		res.json(error);
+	}
+}
+
+export const config = {
+	api: {
+			bodyParser: {
+					sizeLimit: '5mb'
+			}
 	}
 }

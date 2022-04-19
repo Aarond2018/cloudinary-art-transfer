@@ -18,3 +18,4 @@ export default async function handler(req, res) {
     res.json({message: "an error occured"})
   }
 }
+

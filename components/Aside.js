@@ -12,7 +12,7 @@ export default function Aside({ sourceImages, temp, setTemp }) {
 							<img
 								src={obj.secure_url}
 								className={temp === obj.public_id ? `${styles.border}` : ""}
-							></img>
+                alt={obj.public_id} />
 						</div>
 					))
 				)}
