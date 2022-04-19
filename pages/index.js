@@ -13,7 +13,7 @@ export default function Home() {
 
 	useEffect(() => {
 		(async () => {
-			const res = await axios.get("/api/getImages");
+			const res = await axios.get("https://cloudinary-art-transfer.vercel.app/api/getImages");
 			setSourceImages(res.data);
 		})();
 	}, []);

@@ -11,7 +11,7 @@ export default function ProcessImage({ temp, targetImage }) {
     (async function uploadImage() {
       setStatus("Loading....");
       try {
-        const response = await axios.post("/api/upload", {
+        const response = await axios.post("https://cloudinary-art-transfer.vercel.app/api/upload", {
           img: targetImage,
           tempId: temp
         });
